@@ -1,0 +1,473 @@
+{% extends 'web/partials/base.html' %}
+{% load static %}
+{% load cart_tag %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% block content %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'web/css/cart11.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+</head>
+
+<body>
+    {% if request.session.cart|length < 1 %}
+   
+    <!-- Empty Cart area start -->
+    <div class="empty-cart-area pb-100px pt-100px pabove" >
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="cart-heading">
+                      <h2>Your cart item</h2>
+                  </div>
+                  <div class="empty-text-contant text-center">
+                      <i class="pe-7s-shopbag"></i>
+                      <h3>There are no more items in your cart</h3>
+                      <a class="empty-cart-btn bu" href="{% url 'index' %}">
+                          <i class="fa fa-arrow-left"> </i> Continue shopping
+                      </a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- Empty Cart area end -->
+  {% else %}
+    <!-- ----------1040-------------- -->
+   
+    <section>
+        <div class="wit">
+            <div class="table">
+                <h1>Your Cart items</h1>
+
+                <table class="container">
+                    <div class="tab">
+
+                        <tr>
+                            <th>IMAGE</th>
+                            <th>PRODUCT NAME</th>
+                            <th>UNTIL PRICE</th>
+                            <th>QTY</th>
+                            <th>SUBTOTAL</th>
+                            <th>ACTION</th>
+                        </tr>
+                        {% for key,value in request.session.cart.items %}
+                        <tr>
+                            
+                            <td>
+                                <img src=" {{value.image}}" alt="">
+                            </td>
+                            <td class="P">{{value.name}} </td>
+                            <td class="P">{{value.price}} </td>
+                            <td class="Products-quantity Pt">
+                                <a href="{% url 'item_increment' value.product_id %}" class="cart_quantity_up">+</a>
+                                <br>
+                                <input class="" type="text" name="qtybutton" value="{{value.quantity}}">
+                                <br>
+                                <a href="{% url 'item_decrement' value.product_id %}" class="cart_quantity_down">-</a>
+                            </td>
+                            <td class="P"> {{ value.price|multiply:value.quantity }}</td>
+                            <td class="product-subtotal P">
+                                <a href="" class="me-5"><i class="fa-solid fa-pencil" style="color: #000000;"></i></a>
+                                <a href="{% url 'item_clear' key %}"><i class="fa-sharp fa-solid fa-circle-xmark" style="color: #000000;"></i></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        <tr class="jut">
+                            <td class="startt" colspan="2">CONTINUE SHOPPING</td>
+                            <td class="outcolor"></td>
+                            <td colspan="">UPDATE SHOPPING CART</td>
+                            <td class="Clear1" colspan="2"><a href="{% url 'cart_clear' %}">CLEAR CART</a> </td>
+
+                        </tr>
+
+                    </div>
+                </table>
+            </div>
+
+        </div>
+    </section>
+
+    
+    <!-- ----------1040 end------------------ -->
+
+
+    <div class="container mt-100 wit1">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h1>Your Cart Items</h1>
+                        <span>Click on row to perform edit action then Enter for save</span>
+                    </div>
+                    <div class="card-block">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered wittable" id="example-1">
+                                <!-- <thead>
+                                    <tr>
+                                        <th style="display: none;">#</th>
+                                        <th>First</th>
+                                        <th>Last</th>
+
+                                    </tr>
+                                </thead> -->
+                                <tbody>
+                                    {% for key,value in request.session.cart.items %}
+                                    <tr>
+                                        <th scope="row" style="display: none;">1</th>
+                                        <th class="tabledit-view-mode" style="cursor: pointer;"><span
+                                                class="tabledit-span">IMAGE
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="First Name" value="Mark" style="display: none;" disabled="">
+                                        </th>
+                                        <td class="tabledit-view-mode" style="cursor: pointer;"><span
+                                                class="tabledit-span" style=""><img src="{{value.image}}"
+                                                    alt="">
+                                            </span><input class="tabledit-input form-control input-sm fill" type="text"
+                                                name="Last Name" value="Otto" style="display: none;" disabled="">
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" style="display: none;">2</th>
+                                        <th class="tabledit-view-mode" style="cursor: pointer;"><span
+                                                class="tabledit-span">PRODUCT NAME
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="First Name" value="Jacob" style="display: none;" disabled="">
+                                        </th>
+                                        <td class="tabledit-view-mode" style="cursor: pointer;"><span
+                                                class="tabledit-span">{{value.name}}
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="Last Name" value="Thorntonkk" style="display: none;" disabled="">
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" style="display: none;">3</th>
+                                        <th class="tabledit-view-mode" style="cursor: pointer;"><span
+                                                class="tabledit-span">UNTIL PRICE
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="First Name" value="Larry" style="display: none;" disabled="">
+                                        </th>
+                                        <td class="tabledit-view-mode" style="cursor: pointer;"><span
+                                                class="tabledit-span">{{value.price}}
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="Last Name" value="the Bird" style="display: none;" disabled="">
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" style="display: none;">3</th>
+                                        <th class="tabledit-view-mode" style="cursor: pointer;"><span
+                                                class="tabledit-span">QTY
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="First Name" value="Larry" style="display: none;" disabled="">
+                                        </th>
+                                        <td class="tabledit-view-mode " style="cursor: pointer;"><span
+                                                class="tabledit-span"> <a href="{% url 'item_increment' value.product_id %}" class="me-3">+</a>{{value.quantity}}
+                                                <a href="{% url 'item_decrement' value.product_id %}"class=" ms-3">-</a>
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="Last Name" value="the Bird" style="display: none;" disabled="">
+                                        </td>
+
+                                    </tr>
+                                    
+                                    <tr>
+                                        <th scope="row" style="display: none;">3</th>
+                                        <th class="tabledit-view-mode" style="cursor: pointer;"><span
+                                                class="tabledit-span">SUBTOTAL
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="First Name" value="Larry" style="display: none;" disabled="">
+                                        </th>
+                                        <td class="tabledit-view-mode" style="cursor: pointer;"><span
+                                                class="tabledit-span">{{ value.price|multiply:value.quantity }}
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="Last Name" value="the Bird" style="display: none;" disabled="">
+                                        </td>
+
+                                    </tr>
+                                    {% endfor %}
+                                    <tr>
+                                        <th scope="row" style="display: none;">3</th>
+                                        <th class="tabledit-view-mode" style="cursor: pointer;"><span
+                                                class="tabledit-span">ACTION
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="First Name" value="Larry" style="display: none;" disabled="">
+                                        </th>
+                                        <td class="tabledit-view-mode" style="cursor: pointer;"><span
+                                                class="tabledit-span">
+
+                                                <a href=""><i class="fa-solid fa-pencil me-5"
+                                                        style="color: #000000;"></i></a>
+                                        </td>
+                                        <td>
+                                            <a href=""><i class="fa-sharp fa-solid fa-circle-xmark"
+                                                    style="color: #000000;"></i></a>
+
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="Last Name" value="the Bird" style="display: none;" disabled="">
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" style="display: none;">3</th>
+                                        <th class="tabledit-view-mode" style="cursor: pointer;"><span
+                                                class="tabledit-span">
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="First Name" value="Larry" style="display: none;" disabled="">
+                                        </th>
+                                        <td class="tabledit-view-mode clear12" style="cursor: pointer;"><span
+                                                class="tabledit-span"><a href="{% url 'cart_clear' %}"> Clear</a>
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="Last Name" value="the Bird" style="display: none;" disabled="">
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" style="display: none;">3</th>
+                                        <th class="tabledit-view-mode" style="cursor: pointer;"><span
+                                                class="tabledit-span"><a href="">CONTINUE SHOPPING</a>
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="First Name" value="Larry" style="display: none;" disabled="">
+                                        </th>
+                                        <td class="tabledit-view-mode clear12" style="cursor: pointer;"><span
+                                                class="tabledit-span"><a href=""> UPDATE SHOPPING CART</a>
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="Last Name" value="the Bird" style="display: none;" disabled="">
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+     <!-- ------------500px start---------- -->
+
+     <div class="container mt-100 witfive">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h1>Your Cart Items</h1>
+                        <span>Click on row to perform edit action then Enter for save</span>
+                    </div>
+                    <div class="card-block">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered wittable" id="example-1">
+                                <!-- <thead>
+                                        <tr>
+                                            <th style="display: none;">#</th>
+                                            <th>First</th>
+                                            <th>Last</th>
+    
+                                        </tr>
+                                    </thead> -->
+                                <tbody>
+                                    {% for key,value in request.session.cart.items %}
+                                    <tr>
+                                        <th scope="row" style="display: none;">1</th>
+                                        <th class="tabledit-view-mode" style="cursor: pointer;"><span
+                                                class="tabledit-span">IMAGE
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="First Name" value="Mark" style="display: none;" disabled="">
+                                        </th>
+
+
+                                    </tr>
+                                    <tr>
+                                        <td class="tabledit-view-mode" style="cursor: pointer;"><span
+                                                class="tabledit-span" style=""><img src="{{value.image}}"
+                                                    alt="">
+                                            </span><input class="tabledit-input form-control input-sm fill" type="text"
+                                                name="Last Name" value="Otto" style="display: none;" disabled="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" style="display: none;">2</th>
+                                        <th class="tabledit-view-mode" style="cursor: pointer;"><span
+                                                class="tabledit-span">PRODUCT NAME
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="First Name" value="Jacob" style="display: none;" disabled="">
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td class="tabledit-view-mode" style="cursor: pointer;"><span
+                                                class="tabledit-span">{{value.name}}
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="Last Name" value="Thorntonkk" style="display: none;" disabled="">
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" style="display: none;">3</th>
+                                        <th class="tabledit-view-mode" style="cursor: pointer;"><span
+                                                class="tabledit-span">UNTIL PRICE
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="First Name" value="Larry" style="display: none;" disabled="">
+                                        </th>
+                                    <tr>
+                                        <td class="tabledit-view-mode" style="cursor: pointer;"><span
+                                                class="tabledit-span">{{value.price}}
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="Last Name" value="the Bird" style="display: none;" disabled="">
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" style="display: none;">3</th>
+                                        <th class="tabledit-view-mode" style="cursor: pointer;"><span
+                                                class="tabledit-span">QTY
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="First Name" value="Larry" style="display: none;" disabled="">
+                                        </th>
+                                    <tr>
+                                        <td class="tabledit-view-mode " style="cursor: pointer;"><span
+                                                class="tabledit-span"> 
+                                                <a href="{% url 'item_increment' value.product_id %}" class="me-3">+</a>
+                                                {{value.quantity}}
+                                                <a href="{% url 'item_decrement' value.product_id %}" class=" ms-3">-</a>
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="Last Name" value="the Bird" style="display: none;" disabled="">
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" style="display: none;">3</th>
+                                        <th class="tabledit-view-mode" style="cursor: pointer;"><span
+                                                class="tabledit-span">SUBTOTAL
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="First Name" value="Larry" style="display: none;" disabled="">
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td class="tabledit-view-mode" style="cursor: pointer;"><span
+                                                class="tabledit-span">{{ value.price|multiply:value.quantity }}
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="Last Name" value="the Bird" style="display: none;" disabled="">
+                                        </td>
+
+                                    </tr>
+                                    {% endfor %}
+                                    <tr>
+                                        <th scope="row" style="display: none;">3</th>
+                                        <th class="tabledit-view-mode" style="cursor: pointer;"><span
+                                                class="tabledit-span">ACTION
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="First Name" value="Larry" style="display: none;" disabled="">
+                                        </th>
+                                    </tr>
+                                    <td class="tabledit-view-mode" style="cursor: pointer;"><span class="tabledit-span">
+
+                                            <a href=""><i class="fa-solid fa-pencil me-5"
+                                                    style="color: #000000;"></i></a>
+
+                                            <a href=""><i class="fa-sharp fa-solid fa-circle-xmark"
+                                                    style="color: #000000;"></i></a>
+
+                                        </span><input class="tabledit-input form-control input-sm" type="text"
+                                            name="Last Name" value="the Bird" style="display: none;" disabled="">
+                                    </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" style="display: none;">3</th>
+
+                                        <td class="tabledit-view-mode clear12" style="cursor: pointer;"><span
+                                                class="tabledit-span"><a href="{% url 'cart_clear' %}"> Clear</a>
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="Last Name" value="the Bird" style="display: none;" disabled="">
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" style="display: none;">3</th>
+                                        <th class="tabledit-view-mode" style="cursor: pointer;"><span
+                                                class="tabledit-span"><a href="">CONTINUE SHOPPING</a>
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="First Name" value="Larry" style="display: none;" disabled="">
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td class="tabledit-view-mode clear12" style="cursor: pointer;"><span
+                                                class="tabledit-span"><a href=""> UPDATE SHOPPING CART</a>
+                                            </span><input class="tabledit-input form-control input-sm" type="text"
+                                                name="Last Name" value="the Bird" style="display: none;" disabled="">
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- -----------end 500px------------ -->
+
+    <!-- -------------boxtotal------------ -->
+
+    <section class="mr">
+        <div class="box">
+            <div class="cartbox">
+                <form action="">
+                    <h1>Cart Total</h1>
+                    <div class="right">
+                        <p>Total Products</p>
+                        <p>{{cart_total_amount}}</p>
+                    </div>
+                    <h1>Total shipping</h1>
+                    <div class="right">
+                        <p>Shipping</p>
+                        <p>250.00</p>
+                    </div>
+                    <div class="right">
+                        <p>GST</p>
+                        <p>100.00</p>
+                    </div>
+                    <div class="right">
+                        <h1>Grand Total</h1>
+                        <p>{{cart_total_amount|add:250|add:100}}</p>
+                    </div>
+                    <button><a href="{% url 'checkout' %}">PROCEED TO CHECKOUT</a></button>
+
+                </form>
+            </div>
+        </div>
+    </section>
+
+   
+    <!-- -------------boxtotal------------ -->
+
+
+    </section>
+    {% endif %}
+</body>
+{% endblock  %}
+<head>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/jquery.tabledit.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
+
+</html>

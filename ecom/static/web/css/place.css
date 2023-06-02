@@ -1,0 +1,168 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+tr td img{
+    width: 200px;
+    height: 200px;
+    
+}
+td{
+    border: none;
+}
+
+
+/* --------boxtotal--------- */
+.right{
+    display: flex;
+    justify-content: space-between;
+    
+}
+.mr{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.box{
+   
+    width: 350px;
+    height: auto;
+    background-color: rgba(154, 230, 193, 0.651);
+    margin: 50px;
+    border-radius: 10px;
+    box-shadow: 20px 0px 10px 10px;
+
+
+}
+.cartbox{
+    padding: 20px;
+}
+form{
+ 
+}
+
+.cartbox p{
+    padding-top: 20px;
+}
+.cartbox h1{
+    padding-top: 20px;
+}
+.cartbox button{
+    margin-top: 20px;
+    width: 250px;
+    background-color:blue;
+    color:white;
+    margin-left: 30px;
+    border-radius: 3px;
+    font-size: 15px;
+    padding: 5px;
+
+}
+.table h1{
+    font-size: 30px;
+    margin: 20px;
+    padding-left: 100px;
+    color: #000000;
+    font-weight: 900;
+}
+.jut{
+    text-align: end;
+    background-color: rgba(230, 203, 154, 0.651);
+}
+.jut .startt{
+    text-align: start;
+    
+}
+.jut td{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: black;
+    font-weight: 900;
+    background-color: rgb(22, 11, 40);
+}
+th{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: rgb(255, 255, 255);
+}
+td{
+    padding: 30px;
+}
+
+
+
+table{
+
+    margin: auto;
+
+}
+.wit tr .P{
+    padding-top: 100px;
+    /* justify-content: center;
+    align-items: center; */
+    
+}
+.wit tr .Pt{
+    padding-top: 80px;
+    /* justify-content: center;
+    align-items: center; */
+    
+}
+.wit{
+width: 100%;
+}
+.herotop{
+    margin-top: 100px;
+}
+tr,th,td{
+    border: 2px solid white;
+    padding-left: 20px;
+    padding-right:20px ;
+    
+}
+th{
+    background-color: rgba(2, 10, 49, 0.812);
+    text-align: center;
+}
+.jut td{
+    border: 50px solid white;
+}
+.outcolor{
+    background-color: white;
+}
+td{
+    text-align: start;
+}
+
+
+.table h1{
+    font-size: 30px;
+    margin: 20px;
+    padding-left: 100px;
+    color: #000000;
+    font-weight: 900;
+}
+.jut{
+    text-align: end;
+    background-color: rgba(230, 203, 154, 0.651);
+}
+.jut .startt{
+    text-align: start;
+    
+}
+.jut td{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: black;
+    font-weight: 900;
+}
+th{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: rgb(255, 255, 255);
+}
+td{
+    padding: 30px;
+}
