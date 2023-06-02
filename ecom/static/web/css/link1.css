@@ -29,8 +29,8 @@ section{
 
 .wrapper{
     position: relative;
-    width: 400px;
-    height: 450px;
+    width: 450px;
+    height: auto;
     border: 2px solid blue;
     border-radius: 20px;
     backdrop-filter: blur(20px);
