@@ -61,7 +61,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto py-0">
-            <a href="{% url 'index' %}" class="nav-item nav-link active">Home</a>
+            <a href="{% url 'index' %}" class="nav-item nav-link ">Home</a>
             <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
             <a href="{% url 'service' %}" class="nav-item nav-link">Service</a>
             <a href="{% url 'product' %}" class="nav-item nav-link">Product</a>
@@ -81,7 +81,7 @@
             {% else %}
             <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
             {% endif %}
-            <a href="{% url 'cart' %}" class="nav-item nav-link me-5"><i class="fa-solid fa-cart-shopping fa-xl"></i></a>
+            <a href="{% url 'cart' %}" class="nav-item nav-link active me-5"><i class="fa-solid fa-cart-shopping fa-xl"></i></a>
         </div>
     </div>
 </nav>
@@ -89,117 +89,126 @@
 
 
 
-  <section class="mar">
-    <div class="box">
-      <div class="d-flex sp">
-        <div class="left">
-          <form action="{% url 'placeorder' %}" method="POST">
-            {% csrf_token %}
-            <h1>Billing Details</h1>
-            <div class="d-flex gap">
-              <div class="Col-50">
-                <label for="fname" >First Name</label><br>
-                <input type="text" value="{{user.first_name}}" name="Fname">
-              </div>
-              <div class="Col-50">
-                <label for="Lname" >Last Name</label><br>
-                <input type="text" value="{{user.last_name}}" name="Lname">
-              </div>
-            </div>
-            <div class="detail">
-              <div class="input">
-                <label for="" >Company Name</label><br>
-                <input type="text" name="Company"><br>
-                <label for="" >Country</label><br>
-                <select name="Country" aria-placeholder="Select a country">
-                  <option value="">Select a country</option>
-                  <option value="">India</option>
-                  <option value="">Japan</option>
-                  <option value="">UAE</option>
-                  <option value="">China</option>
-                </select>
-                <br>
-                <label for="" >Streel Address</label><br>
-                <input type="text" placeholder="House number and streel name" name="Address"><br>
-                <input class="inputA" type="text" placeholder="Apartment,suite,unit etc"><br>
-                <label for="">Town/City</label><br>
-                <input type="text"  name="City">
-              </div>
-              <div class="d-flex gap">
-                <div class="col-50">
-                  <label for="">State/Country</label><br>
-                  <input type="text"  name="State">
-                </div>
-                <div class="col-50">
-                  <label for="">Postcode/ZIP</label><br>
-                  <input type="text"  name="Pin">
-                </div>
-              </div>
-              <div class="d-flex gap">
-                <div class="col-50">
-                  <label for="">Phone</label><br>
-                  <input type="number"  name="Phone">
-                </div>
-                <div class="col-50">
-                  <label for="" >Email</label><br>
-                  <input type="text" placeholder="@gmail.com" value="{{user.email}}" readonly name="Email">
-                </div>
-              </div>
-              <h3>Create An Account</h3>
-              <h3>Additional infromation</h3>
-              <h5>Order Notes</h5>
-              <textarea name="" id="" cols="80"
-                rows="5" placeholder="Notes about your order, e.g. special notes for delivery" class="ps-2"></textarea>
-              <h3 class="MB">Ship To A Diifferent ?</h3>
 
-            </div>
-          
-        </div>
-        <div class="right">
-          <h1>Your Order</h1>
-          <div class="box1">
-            <div class="cartbox">
-              <form action="">
+
+  <section>
+        <!-- Contact Start -->
+        <div class="container-fluid pt-5">
+          <div class="container">
+              <div class="border-start border-5 border-dark ps-5 mb-5" style="max-width: 600px;">
+                  <h6 class="text-primary text-uppercase">Billing Us</h6>
+                  <h1 class="display-5 text-uppercase mb-0">Billing Details</h1>
+              </div>
+              <form action="{% url 'placeorder' %}" method="POST">
+                {% csrf_token %}
+              <div class="row g-5">
                 
-                <div class="right1">
-                  <h5>Product</h5>
-                  <h5>Total</h5>
-                </div>
-                {% for key,value in request.session.cart.items %}
-                <div class="right1">
-                  <p>{{value.name}}</p>
-                  <p>{{value.quantity}}</p>
-                  <p>{{value.price|multiply:value.quantity}}</p>
-                </div>
-                {% endfor %}
-                <div class="right1">
-                  <p>Shipping</p>
-                  <p>Shipping 20.00</p>
-                  <p>GST 10.00</p>
-                </div>
-                <div class="right1 bo1">
-                  <h5>Total</h5>
-                  <h5 class="bo">{{cart_total_amount|add:20|add:10}}</h5>
-                </div>
-
+                  <div class="col-lg-7">
+                      
+                          <div class="row g-3">
+                              <div class="col-6">
+                                  <input type="text" name="Fname" class="form-control bg-light border-0 px-4" placeholder="Your Name" style="height: 55px;">
+                              </div>
+                                  <div class="col-6">
+                                  <input type="text" name="Lname" class="form-control bg-light border-0  px-4" placeholder="Last Name" style="height: 55px;">
+                              </div>
+                              <div class="col-12">
+                                  <input type="text" name="Company" class="form-control bg-light border-0 px-4" placeholder="Company Name" style="height: 55px;">
+                              </div>
+                              <div class="col-12">
+                                {% comment %} <input type="text" class="form-control bg-light border-0 px-4" placeholder="Company Name" style="height: 55px;"> {% endcomment %}
+                                <select name="Country" id="" class="form-control bg-light border-1 px-4" >
+                                  <option value="">India</option>
+                                  <option value="">Japan</option>
+                                  <option value="">Pakistan</option>
+                                  <option value="">Sri-Lakhan</option>
+                                </select>
+                            </div>
+                              <div class="col-12">
+                                  <label for="" class="border-0 px-4">Streel Adress</label>
+                                  <input type="text" name="Address" class="form-control bg-light border-0 px-4" placeholder="House number & streel number" style="height: 55px;">
+                                  <input type="text" class="form-control bg-light border-0 mt-3 px-4" placeholder="Apartment,suite,unit etc" style="height: 55px;">
+                              </div>
+                              <div class="col-12">
+                                <input type="text" name="City" class="form-control bg-light border-0 px-4" placeholder="Town/City" style="height: 55px;">
+                            </div>
+                            <div class="col-6">
+                              <input type="text" name="State" class="form-control bg-light border-0 px-4" placeholder="State/Country" style="height: 55px;">
+                          </div>
+                              <div class="col-6">
+                              <input type="text" name="Pin" class="form-control bg-light border-0  px-4" placeholder="Postcode/ZIP" style="height: 55px;">
+                          </div>
+                          <div class="col-6">
+                            <input type="number" name="Phone" class="form-control bg-light border-0 px-4" placeholder="Phone number" style="height: 55px;">
+                        </div>
+                            <div class="col-6">
+                            <input type="email" name="Email" class="form-control bg-light border-0  px-4" placeholder="Email" style="height: 55px;">
+                        </div>
+                        <div class="col-12">
+                          <h3 class="text-dark">Create An Acount</h3>
+                        </div>
+                          <div class="col-12">
+                            <h5 class="text-dark">Additional Infromation</h5>
+                        </div>  
                 
+                              <div class="col-12">
+                                <label for="" class="border-0 px-4 text-dark">Order Notes</label>
+                                  <textarea class="form-control bg-light border-0 px-4 py-3" rows="6" placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
+                              </div>
+                              
+                              <p>Ship to a different</p>
+                             
+                          </div>
+                     
+                  </div>
+                  <div class="col-lg-5 ">
+                      <div class="bg-light mb-5 p-1 ">
+                        <div class="row g-2 mx-auto ">
+                          
 
 
-
-
-              
-            </div>
+                       
+                          <h1>Your Order</h1>
+                          <div class="box1">
+                            <div class="cartbox">
+                              <form action="">
+                                
+                                <div class="right1">
+                                  <h5 class="col-9">Product</h5>
+                                  <h5 class="col-3">Total</h5>
+                                </div>
+                                {% for key,value in request.session.cart.items %}
+                                <div class="right1">
+                                  <p class="col-4">{{value.name}}</p>
+                                  <p class="col-4 ps-5">{{value.quantity}}</p>
+                                  <p class="col-4">{{value.price|multiply:value.quantity}}</p>
+                                </div>
+                                {% endfor %}
+                                <div class="right1">
+                                  <p class="col-4">Shipping</p>
+                                  <p class="col-4" >Shipping 20.00</p>
+                                  <p class="col-4">GST 10.00</p>
+                                </div>
+                                <div class="right1 bo1">
+                                  <h5 class="col-9">Total</h5>
+                                  <h5 class=" border-2 border-dark col-3">{{cart_total_amount|add:20|add:10}}</h5>
+                                </div>
+                              </form>   
+                            </div>
+                          </div>
+                          <div class="col-12 mx-auto">
+                          <button class="btn btn-primary w-100 py-3" type="submit">submit</button>
+                          </div>
+                        </div>
+                       
+                      </div>
+                  </div>
+                 
+              </div>
+            </form>
           </div>
-         
-            <input type="submit" class="btn1 btn-info">
-            {% comment %} <button><a href="{% url 'placeorder' %}">PLACE ORDER</a></button>  {% endcomment %}
-        
-        </div>
       </div>
-    </div>
-
-    
-    </form>
+      <!-- Contact End -->
   </section>
 
 

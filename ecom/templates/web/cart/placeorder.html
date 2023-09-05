@@ -64,7 +64,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto py-0">
-            <a href="{% url 'index' %}" class="nav-item nav-link active">Home</a>
+            <a href="{% url 'index' %}" class="nav-item nav-link ">Home</a>
             <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
             <a href="{% url 'service' %}" class="nav-item nav-link">Service</a>
             <a href="{% url 'product' %}" class="nav-item nav-link">Product</a>
@@ -84,7 +84,7 @@
             {% else %}
             <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
             {% endif %}
-            <a href="{% url 'cart' %}" class="nav-item nav-link me-5"><i class="fa-solid fa-cart-shopping fa-xl"></i></a>
+            <a href="{% url 'cart' %}" class="nav-item nav-link active me-5"><i class="fa-solid fa-cart-shopping fa-xl"></i></a>
         </div>
     </div>
 </nav>

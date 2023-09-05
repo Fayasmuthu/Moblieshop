@@ -14,6 +14,9 @@ class Members(models.Model):
 
 class Teamoffer(models.Model):
     image=models.ImageField(upload_to='Media/Members1_image')
+    about=models.CharField(max_length=200)
+    name=models.CharField(max_length=50)
+    profession=models.CharField(max_length=50)
 
 class LatestA(models.Model):
     image=models.ImageField(upload_to='Media/Web_image')
@@ -46,3 +49,18 @@ class Orderitem(models.Model):
     price=models.FloatField()
     total=models.IntegerField()
     paid=models.BooleanField(default=False)
+
+class Email(models.Model):
+    Email=models.EmailField(max_length=50)
+
+class Contact(models.Model):
+    Name=models.CharField(max_length=50)
+    Email1=models.EmailField(max_length=40)
+    Subject=models.CharField(max_length=200)
+    Message=models.CharField(max_length=250)
+    
+class Leave_message(models.Model):
+    Name=models.CharField(max_length=50)
+    Email1=models.EmailField(max_length=40)
+    Website=models.CharField(max_length=200)
+    Comment=models.CharField(max_length=250)

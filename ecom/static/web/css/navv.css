@@ -1,0 +1,32 @@
+.logo1 img{
+    width: 50px;
+    position: absolute;
+    left: 0;
+    
+}
+
+
+@media (max-width:330px) {
+    .logo1 img{
+        width: 50px;
+        position: absolute;
+        left: 0;  
+    }
+    
+}
+
+@media (min-width:350px) {
+    .logo1 img{
+        width: 60px;
+        position: absolute;
+        left: 15px;  
+        top: 5px;
+    }
+
+    .logo1 .mobb{
+        position: absolute;
+        left: 50px;
+        top: 5px;
+
+    }
+}

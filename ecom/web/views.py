@@ -1,6 +1,5 @@
 from django.shortcuts import render , redirect
-from .models import Product , Members ,Teamoffer ,LatestA ,LatestB,Order,Orderitem
-from django.contrib.auth.models import User
+from .models import Product , Members ,Teamoffer ,LatestA ,LatestB,Order,Orderitem,Email,Contact,Leave_message
 from django.contrib.auth import authenticate, login ,logout
 from django.contrib.auth.decorators import login_required
 from cart.cart import Cart
@@ -15,26 +14,176 @@ def index(request):
         'aboutW':LatestA.objects.all(),
         'AboutX':LatestB.objects.all(),
     }
+
+
+    if request.method=="POST":
+        email = request.POST.get("email123")
+
+
+        email_1=Email(
+            Email = email
+        )
+        email_1.save()
+    
     return render(request,"web/index.html",context)
 
 def about(request):
-    return render(request,"web/detail/about.html")
+    context={
+    'Mem':Members.objects.all()
+    }
+
+    if request.method=="POST":
+        email = request.POST.get("email123")
+
+
+        email_1=Email(
+            Email = email
+        )
+        email_1.save()
+    return render(request,"web/detail/about.html",context)
 def blog(request):
+
+    if request.method=="POST":
+        email = request.POST.get("email123")
+
+
+        email_1=Email(
+            Email = email
+        )
+        email_1.save()
     return render(request,"web/detail/blog.html")
 def contact1(request):
+
+    if request.method == 'POST':
+        if request.POST.get("form_type") == 'formOne':
+            NameC=request.POST.get("Name_C")
+            EmailC=request.POST.get("Email_C")
+            SubjectC=request.POST.get("Subject_C")
+            MessageC=request.POST.get("Message_C")
+       
+            contact_1=Contact(
+                Name=NameC,
+                Email1=EmailC,
+                Subject=SubjectC,
+                Message=MessageC
+            )
+            contact_1.save()
+
+            
+        elif request.POST.get("form_type") == 'formTwo':
+            email = request.POST.get("email123")
+
+            email_1=Email(
+                Email = email)
+            email_1.save()
+            
+
+
+
+
+
+
     return render(request,"web/detail/contact.html")
 def detail(request):
+    if request.method=="POST":
+        if request.POST.get("form_type")=='formthree':
+            Name=request.POST.get("Name_L")
+            EmailL=request.POST.get("Email_L")
+            Website=request.POST.get("Web_L")
+            Comment=request.POST.get("Com_L")
+
+            leave_1=Leave_message(
+                Name=Name,
+                Email1=EmailL,
+                Website=Website,
+                Comment=Comment
+
+            )
+            leave_1.save()
+
+        elif request.POST.get("form_type")=='formTwo':
+            email = request.POST.get("email123")
+
+            email_1=Email (
+                Email = email
+                )
+            email_1.save()
+
+
+
+
+
+
+        
+
+
+       
     return render(request,"web/detail/detail.html")
 def price(request):
+    if request.method=="POST":
+        email = request.POST.get("email123")
+
+
+        email_1=Email(
+            Email = email
+        )
+        email_1.save()
     return render(request,"web/detail/price.html")
 def product(request):
-    return render(request,"web/detail/product.html")
+    context={
+        'prod' : Product.objects.all(),
+        }
+    if request.method=="POST":
+        email = request.POST.get("email123")
+
+
+        email_1=Email(
+            Email = email
+        )
+        email_1.save()
+    return render(request,"web/detail/product.html",context)
 def service(request):
-    return render(request,"web/detail/service.html")
+    context={
+        'MemC':Teamoffer.objects.all(),
+        }
+
+    if request.method=="POST":
+        email = request.POST.get("email123")
+
+
+        email_1=Email(
+            Email = email
+        )
+        email_1.save()
+    return render(request,"web/detail/service.html",context)
 def team(request):
-    return render(request,"web/detail/team.html")
+    context={
+        'Mem':Members.objects.all()
+        }
+    
+    if request.method=="POST":
+        email = request.POST.get("email123")
+
+
+        email_1=Email(
+            Email = email
+        )
+        email_1.save()
+    return render(request,"web/detail/team.html",context)
 def testimonial(request):
-    return render(request,"web/detail/testimonial.html")
+    context={
+        'MemC':Teamoffer.objects.all(),
+        }
+    
+    if request.method=="POST":
+        email = request.POST.get("email123")
+
+
+        email_1=Email(
+            Email = email
+        )
+        email_1.save()
+    return render(request,"web/detail/testimonial.html",context)
 
 def Login1(request):
     if request.method=="POST":
@@ -181,3 +330,5 @@ def placeorder(request):
 @login_required(login_url="login")
 def confirm(request):
     return render(request, 'web/cart/confirm.html')
+
+

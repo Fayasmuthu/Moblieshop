@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product , Members ,Teamoffer ,LatestA ,LatestB,Order,Orderitem
+from .models import Product , Members ,Teamoffer ,LatestA ,LatestB,Order,Orderitem, Email,Contact,Leave_message
 
 # Register your models here.
 
@@ -14,4 +14,7 @@ admin.site.register(Teamoffer),
 admin.site.register(LatestA),
 admin.site.register(LatestB),
 admin.site.register(Order,OrderAdmin),
-admin.site.register(Orderitem)
+admin.site.register(Orderitem),
+admin.site.register(Email),
+admin.site.register(Contact),
+admin.site.register(Leave_message)

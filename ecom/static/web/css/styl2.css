@@ -49,6 +49,7 @@
 }
 .navbar-toggler{
     color: white;
+   
 }
 
 .back-to-top {
@@ -116,6 +117,7 @@
         margin-left: 0;
         padding: 10px 0;
     }
+    
 }
 
 .hero-header {
@@ -397,6 +399,38 @@
     opacity: 1;
 }
 
+/* --------------product item------- */
+
+.product-item img {
+    transition: .5s;
+}
+
+.product-item:hover img {
+    transform: scale(0.5);
+}
+
+.product-item .team-overlay {
+    position: absolute;
+    top: 45px;
+    right: 45px;
+    bottom: 45px;
+    left: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(122, 183, 48, .8);
+    transition: .5s;
+    opacity: 0;
+}
+
+.product-item:hover .team-overlay {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 1;
+}
+
 .bg-testimonial {
     background: url(../image/call.jpg) top left no-repeat;
     background-size: cover;
@@ -467,4 +501,26 @@
 
 .blog-item a:hover i::after {
     width: 50px;
+}
+
+.product .border-primary{
+    color: rgb(1, 1, 8);
+}
+
+.product-carousel a{
+    text-decoration: none;
+}
+.border-primary{
+    
+}
+.borderr .border-primary{
+    box-shadow: 0px 5px 5px 0px ;
+}
+
+.borderr .border-danger{
+    box-shadow: 0px 5px 5px 0px ;
+}
+
+.border1 .border-info{
+    box-shadow: 0px 5px 5px 0px ;
 }
